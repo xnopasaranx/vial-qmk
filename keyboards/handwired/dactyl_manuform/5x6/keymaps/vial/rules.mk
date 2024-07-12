@@ -5,3 +5,4 @@ LTO_ENABLE = yes
 
 COMBO_ENABLE = no
 TAP_DANCE_ENABLE = no
+RGBLIGHT_ENABLE = yes        # Enable keyboard RGB underglow
