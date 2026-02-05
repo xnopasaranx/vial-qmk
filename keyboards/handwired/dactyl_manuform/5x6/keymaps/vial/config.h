@@ -11,6 +11,7 @@
 
 // WS2812 RGB LED strip input and number of LEDs
 #define RGB_DI_PIN D3
+#undef RGBLIGHT_LED_COUNT
 #define RGBLIGHT_LED_COUNT 24
 #define RGBLIGHT_SPLIT
 //#define RGBLED_SPLIT {12,12}
