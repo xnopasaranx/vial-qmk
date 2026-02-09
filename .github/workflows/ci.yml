@@ -88,6 +88,11 @@ jobs:
           exit 1
         fi
 
+    - uses: actions/upload-artifact@v6
+      with:
+        name: upload-artifact
+        path: .build/
+
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
       run: |
