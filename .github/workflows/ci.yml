@@ -43,7 +43,7 @@ jobs:
       id: build
       run: |
         git config --global --add safe.directory $(pwd)
-        if ! qmk compile  -kb handwired/dactyl_manuform/5x6 -km default -j $(nproc);
+        if ! qmk compile -kb handwired/dactyl_manuform/5x6 -km default -j $(nproc);
         #$(qmk find -km vial | sed "s/:vial$/:${KEYMAP}/");
           then
           echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
@@ -82,7 +82,7 @@ jobs:
       id: build
       run: |
         git config --global --add safe.directory $(pwd)
-        if ! qmk compile  qmk compile -kb handwired/dactyl_manuform/5x6 -km vial -j $(nproc);
+        if ! qmk compile -kb handwired/dactyl_manuform/5x6 -km vial -j $(nproc);
           then
           echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
           exit 1
