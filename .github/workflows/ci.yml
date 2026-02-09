@@ -82,15 +82,17 @@ jobs:
       id: build
       run: |
         git config --global --add safe.directory $(pwd)
+        echo "$(pwd)"
         if ! qmk compile -kb handwired/dactyl_manuform/5x6 -km vial -j $(nproc);
           then
           echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
           exit 1
         fi
-
-    - uses: actions/upload-artifact@v6
+        
+    - name: upload-artifact
+      uses: actions/upload-artifact@v6
       with:
-        name: upload-artifact
+        run: echo "$(pwd)"
         path: qmk_firmware/
 
     - name: Dump failure logs
