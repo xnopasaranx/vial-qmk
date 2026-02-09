@@ -91,7 +91,7 @@ jobs:
     - uses: actions/upload-artifact@v6
       with:
         name: upload-artifact
-        path: .build/
+        path: qmk_firmware/
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
