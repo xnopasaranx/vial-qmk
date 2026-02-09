@@ -92,8 +92,7 @@ jobs:
     - name: upload-artifact
       uses: actions/upload-artifact@v6
       with:
-        run: echo "$(pwd)"
-        path: qmk_firmware/
+        path: ${GITHUB_WORKSPACE}/qmk_firmware/
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
