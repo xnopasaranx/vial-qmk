@@ -67,10 +67,7 @@ jobs:
   build-vial:
     name: Build Vial keymap
     runs-on: ubuntu-latest
-    container: 
-      image: ghcr.io/qmk/qmk_cli@sha256:2dc05fc9f32efebd6b05c2b8676ee548358bc7e151e9dbf4dac6b6eed4513b07
-      volumes:
-        - build_cache:/__w
+    container: ghcr.io/qmk/qmk_cli@sha256:2dc05fc9f32efebd6b05c2b8676ee548358bc7e151e9dbf4dac6b6eed4513b07 
     env:
       KEYMAP: handwired/dactyl_manuform/5x6:vial
 
@@ -83,22 +80,21 @@ jobs:
 
     - name: Build
       id: build
-      working-directory: /__w/
       run: |
         git config --global --add safe.directory $(pwd)
-        echo "$(pwd)"
         if ! qmk compile -kb handwired/dactyl_manuform/5x6 -km vial -j $(nproc);
           then
           echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
           exit 1
         fi
-        
-    - name: upload-artifact
-      uses: actions/upload-artifact@v6
+
+    - uses: actions/upload-artifact@v6
       with:
+        name: upload-artifact
         path: | 
-          /__w/.build/**/*.bin
-          /__w/.build/**/*.hex
+           .build/*.hex 
+           .build/*.bin 
+           .build/*.uf2
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
