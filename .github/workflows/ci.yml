@@ -67,7 +67,10 @@ jobs:
   build-vial:
     name: Build Vial keymap
     runs-on: ubuntu-latest
-    container: ghcr.io/qmk/qmk_cli@sha256:2dc05fc9f32efebd6b05c2b8676ee548358bc7e151e9dbf4dac6b6eed4513b07 
+    container: 
+      image: ghcr.io/qmk/qmk_cli@sha256:2dc05fc9f32efebd6b05c2b8676ee548358bc7e151e9dbf4dac6b6eed4513b07
+      volumes:
+        - build_cache:/workspace
     env:
       KEYMAP: handwired/dactyl_manuform/5x6:vial
 
@@ -77,9 +80,11 @@ jobs:
       with:
         persist-credentials: false
         submodules: recursive
+        path: /workspace/repo
 
     - name: Build
       id: build
+      working-directory: /workspace/repo
       run: |
         git config --global --add safe.directory $(pwd)
         echo "$(pwd)"
@@ -93,8 +98,8 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         path: | 
-          .build/**/*.bin
-          .build/**/*.hex
+          /workspace/repo/.build/**/*.bin
+          /workspace/repo/.build/**/*.hex
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
