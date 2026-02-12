@@ -70,7 +70,7 @@ jobs:
     container: 
       image: ghcr.io/qmk/qmk_cli@sha256:2dc05fc9f32efebd6b05c2b8676ee548358bc7e151e9dbf4dac6b6eed4513b07
       volumes:
-        - build_cache:/workspace
+        - build_cache:/__w
     env:
       KEYMAP: handwired/dactyl_manuform/5x6:vial
 
@@ -80,11 +80,10 @@ jobs:
       with:
         persist-credentials: false
         submodules: recursive
-        path: /workspace/repo
 
     - name: Build
       id: build
-      working-directory: /workspace/repo
+      working-directory: /__w/
       run: |
         git config --global --add safe.directory $(pwd)
         echo "$(pwd)"
@@ -98,8 +97,8 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         path: | 
-          /workspace/repo/.build/**/*.bin
-          /workspace/repo/.build/**/*.hex
+          /__w/.build/**/*.bin
+          /__w/.build/**/*.hex
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
