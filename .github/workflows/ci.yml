@@ -92,7 +92,9 @@ jobs:
     - name: upload-artifact
       uses: actions/upload-artifact@v6
       with:
-        path: /__w/vial-qmk/vial-qmk/qmk_firmware/
+        path: | 
+          .build/**/*.bin
+          .build/**/*.hex
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
