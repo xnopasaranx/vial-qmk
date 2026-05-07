@@ -14,12 +14,12 @@
 # 3. Go to Actions → latest run → download the artifact.
 # 4. Flash the .uf2 (RP2040) or .hex (AVR) to your keyboard.
 #
-name: Build my_keyboard
+name: Build dactyl_manuform_5x6
 on:
   push:
     paths:
       - "keyboards/handwired/dactyl_manuform/5x6/**"
-      - ".github/workflows/build.yml"
+      - ".github/workflows/ci.yml"
   workflow_dispatch:   # allows manual trigger from GitHub Actions UI
 jobs:
   build:
