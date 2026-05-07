@@ -52,7 +52,7 @@ jobs:
 
       # Step 6: Verify required files are present before building
       - run: |
-          test -f vial-qmk/keyboards/handwired/handwired/dactyl_manuform/5x6/keyboard.json || (echo "ERROR: keyboard.json missing" && exit 1)
+          test -f vial-qmk/keyboards/handwired/dactyl_manuform/5x6/keyboard.json || (echo "ERROR: keyboard.json missing" && exit 1)
           test -f vial-qmk/keyboards/handwired/dactyl_manuform/5x6/keymaps/vial/vial.json || (echo "ERROR: vial.json missing" && exit 1)
           find vial-qmk/keyboards/handwired/dactyl_manuform/5x6 -type f -print
 
