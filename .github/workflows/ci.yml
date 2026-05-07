@@ -57,7 +57,7 @@ jobs:
           find vial-qmk/keyboards/handwired/dactyl_manuform/5x6 -type f -print
 
       # Step 7: Compile the firmware (V=1 = verbose output for debugging)
-      - run: cd vial-qmk && make handwired/dactyl_manuform/5x6:vial V=1
+      - run: cd vial-qmk && make handwired/dactyl_manuform/5x6:vial
 
       # Step 8: Collect the compiled firmware file(s)
       - run: |
@@ -69,5 +69,5 @@ jobs:
       # Step 9: Upload so you can download from the Actions UI
       - uses: actions/upload-artifact@v4
         with:
-          name: my_keyboard_vial_firmware
+          name: dactyl_manuform_5x6_vial_firmware
           path: artifacts
