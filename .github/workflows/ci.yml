@@ -87,14 +87,15 @@ jobs:
           echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
           exit 1
         fi
+        cd -
 
     - uses: actions/upload-artifact@v6
       with:
         name: upload-artifact
         path: | 
-           .build/*.hex 
-           .build/*.bin 
-           .build/*.uf2
+           build/*.hex 
+           build/*.bin 
+           build/*.uf2
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
