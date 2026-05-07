@@ -37,7 +37,7 @@ jobs:
           path: vial-qmk
 
       # Step 3: Install build dependencies
-      - run: sudo apt-get update && sudo apt-get install -y python3 python3-pip git make rsync
+      - run: sudo apt-get update && sudo apt-get install -y python3 python3-pip git make rsync gcc-avr
 
       # Step 4: Install the QMK CLI tool
       - run: python3 -m pip install qmk && echo "$HOME/.local/bin" >> $GITHUB_PATH
